@@ -41,12 +41,13 @@ struct IslandView: View {
     let controller: IslandController
 
     static let flareRadius: CGFloat = 14
+    static let peekFlareRadius: CGFloat = 6
 
     var body: some View {
-        let size = state.isExpanded ? state.expandedSize : state.notchSize
+        let size = state.isExpanded ? state.expandedSize : state.isPeeking ? state.peekSize : state.notchSize
         let shape = NotchShape(
-            topRadius: state.isExpanded ? Self.flareRadius : 0,
-            bottomRadius: state.isExpanded ? 28 : 10
+            topRadius: state.isExpanded ? Self.flareRadius : state.isPeeking ? Self.peekFlareRadius : 0,
+            bottomRadius: state.isExpanded ? 28 : state.isPeeking ? 13 : 10
         )
 
         ZStack(alignment: .top) {
@@ -69,7 +70,7 @@ struct IslandView: View {
         .frame(width: size.width, height: size.height, alignment: .top)
         .clipShape(shape)
         // On a screen without a notch the collapsed hover zone is invisible.
-        .opacity(state.hasNotch || state.isExpanded ? 1 : 0)
+        .opacity(state.hasNotch || state.isExpanded || state.isPeeking ? 1 : 0)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .environment(\.colorScheme, .dark)
     }

@@ -1,6 +1,6 @@
 # SmartClipBoard
 
-Clipboard history in your MacBook's notch. Hover the notch and it opens into a
+Clipboard history in your MacBook's notch. Rest your pointer on the notch and it opens into a
 Dynamic-Island-style panel with everything you copied recently. Click an item to copy it again, or
 drag it anywhere.
 
@@ -14,7 +14,9 @@ drag it anywhere.
   - History is kept in memory only. It is never saved to disk and never sent over the network.
   - Passwords copied from password managers are skipped.
 - **Light**: about 0% CPU and about 11 MB of memory when idle.
-- **Works without a notch too**: on other Macs and external displays, hovering the top centre of the screen opens it.
+- **No accidental opens**: it opens only after your pointer rests on the notch for 0.7 s. While you
+  wait, the notch swells slightly to show it's about to open. Move away and nothing happens.
+- **Works without a notch too**: on other Macs and external displays, resting on the top centre of the screen opens it.
 
 ## Requirements
 
@@ -39,7 +41,7 @@ The first build takes about a minute. The script then:
 3. turns on auto-start at login, and
 4. starts it.
 
-Move your pointer to the notch and the island opens.
+Rest your pointer on the notch for a moment and the island opens.
 
 Keep the `SmartClipBoard` folder, because you'll use it to update or uninstall.
 
@@ -50,7 +52,7 @@ Keep the `SmartClipBoard` folder, because you'll use it to update or uninstall.
 
 | To | Do this |
 |---|---|
-| Open the island | Hover the notch |
+| Open the island | Rest the pointer on the notch for 0.7 s. It swells slightly, then opens. |
 | Copy an item again | Click it, then press ⌘V where you want it |
 | Put an item somewhere directly | Drag it there |
 | Read the full text of a chip | Hover the chip; the text appears in the header |
@@ -153,7 +155,7 @@ dependencies.
 - Twice a second it checks a single counter that macOS increases on every copy. It reads the
   clipboard only when that counter changes.
 - It sorts each copy into words or media and keeps it in memory.
-- A borderless window sized exactly to the notch grows into the island when you hover it. The
+- A borderless window sized exactly to the notch grows into the island when your pointer rests on it. The
   window never takes keyboard focus, so ⌘V always goes to the app you were using.
 
 For the details, including CPU and memory measurements and every file the app touches, see

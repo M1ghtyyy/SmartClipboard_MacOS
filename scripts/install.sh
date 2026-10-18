@@ -42,4 +42,4 @@ fi
 echo
 echo "$APP_NAME is installed in $APP_PATH and running."
 echo "Auto-start at login: $autostart   (change it with scripts/autostart.sh on|off)"
-echo "Move your pointer to the notch to open it."
+echo "Rest your pointer on the notch for a moment to open it."

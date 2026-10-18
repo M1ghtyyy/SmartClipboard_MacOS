@@ -15,7 +15,7 @@
  │   ClipboardStore (in memory: 30 words, 20 media)          │
  │        ▼                                                  │
  │   IslandController: borderless panel over the notch       │
- │     hover → window grows, SwiftUI spring animation        │
+ │     rest 0.7 s → notch swells, then island springs open   │
  │     click → write the item back to the clipboard          │
  │     drag  → AppKit drag session (text or file URL)        │
  └───────────────────────────────────────────────────────────┘
@@ -62,8 +62,12 @@ the frontmost app are skipped as well.
   hover zone at the top centre of the main screen.
 - **Hover detection.** It is event-driven, using an `NSTrackingArea`. Nothing polls the mouse, and
   no Accessibility permission is needed.
-  - After you hover for 0.12 s, the window grows. A SwiftUI spring then animates the shape out of
-    the notch.
+  - It opens only when the pointer rests on the notch for **0.7 s**, so passing by never opens it.
+  - After 0.15 s of resting, the notch starts to swell slightly. The swell keeps growing until the
+    island opens, so it works as a progress cue. If you move away first, it shrinks back and
+    nothing opens.
+  - A pass through the notch shorter than 0.15 s shows nothing at all.
+  - At 0.7 s the window grows and a SwiftUI spring animates the island out of the notch.
   - About 0.25 s after the pointer leaves, it closes.
   - While a drag is in progress, it stays open.
 - **Keyboard focus.** The panel is a non-activating panel that can never become the key window.
